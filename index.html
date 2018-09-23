@@ -1,0 +1,96 @@
+<head>
+  <link rel="stylesheet" type="text/css" href="application.css">
+</head>
+
+<header id='title'><h1 id="title1">Number</h1><h1 id='title2'> Guesser</h1></header><br>
+
+<p id='message'></p><br>
+<input type="number" id="guess" placeholder='Enter your guess' onkeyup="enable()"></input><br>
+
+<span>
+  <button type='button' id='submitguess' onclick="myResponse()" disabled>Guess</button>
+  <button type='button' id='clear' onclick="clearguess()" disabled>Clear</button>
+</span>
+
+<span class='responses'>
+  <p class='gametext' id='guesstext'></p>
+  <p id='yourguess'></p>
+  <p class='gametext' id='response'></p>
+</span>
+
+<span>
+  <button type='button' id='reset' onclick="reset()" disabled>New #</button>
+  <button type='button' id='restart' onclick="restart()" disabled>Restart</button>
+</span>
+
+<p id='answer'></p>
+
+<script>
+var min = 40;
+var max = 60;
+var correct = Math.floor(Math.random() * (max - min + 1)) + min;
+document.getElementById('message').innerHTML = "Guess a number between " + min + " and " + max;
+
+function enable() {
+  document.getElementById("submitguess").disabled = false;
+  document.getElementById("clear").disabled = false;
+  document.getElementById("reset").disabled = false;
+  document.getElementById("restart").disabled = false;
+};
+
+function myResponse() {
+  var guess = document.getElementById('guess').value;
+
+  if (guess < min || guess > max) {
+    document.getElementById('guesstext').innerHTML = `Choose a number between ${min} and ${max}`;
+  } else {
+    if (guess == correct) {
+      var response = 'BOOM!';
+      min -= 10;
+      max += 10;
+    } else if (guess > correct) {
+      var response = 'That is too high';
+    } else {
+      var response = 'That is too low';
+    };
+    document.getElementById("guesstext").innerHTML = "Your last guess was";
+    document.getElementById("yourguess").innerHTML = guess;
+    document.getElementById("response").innerHTML = response;
+  };
+};
+
+function clearguess() {
+  document.getElementById('guess').value = "";
+  document.getElementById("submitguess").disabled = true;
+  document.getElementById("clear").disabled = true;
+  document.getElementById("restart").disabled = true;
+}
+
+function reset() {
+  correct = Math.floor(Math.random() * (max - min + 1)) + min;
+  document.getElementById('message').innerHTML = "Guess a number between " + min + " and " + max;
+  document.getElementById("guesstext").innerHTML = "";
+  document.getElementById("yourguess").innerHTML = "";
+  document.getElementById("response").innerHTML = "";
+  document.getElementById('guess').value = "";
+  document.getElementById("submitguess").disabled = true;
+  document.getElementById("clear").disabled = true;
+  document.getElementById("reset").disabled = true;
+}
+
+function restart() {
+  var min = 40;
+  var max = 60;
+  var correct = Math.floor(Math.random() * (max - min + 1)) + min;
+  document.getElementById('message').innerHTML = "Guess a number between " + min + " and " + max;
+  document.getElementById("guesstext").innerHTML = "";
+  document.getElementById("yourguess").innerHTML = "";
+  document.getElementById("response").innerHTML = "";
+  document.getElementById('guess').value = "";
+  document.getElementById("submitguess").disabled = true;
+  document.getElementById("clear").disabled = true;
+  document.getElementById("reset").disabled = true;
+  document.getElementById("restart").disabled = true;
+};
+
+</script>
