@@ -26,67 +26,91 @@
 <p id='answer'></p>
 
 <script>
+// set min and max variables
 var min = 40;
 var max = 60;
+// generated random number within min/max range
 var correct = Math.floor(Math.random() * (max - min + 1)) + min;
+// display 'Guess a number' message
 document.getElementById('message').innerHTML = "Guess a number between " + min + " and " + max;
 
+//function called when a number is input into number field
 function enable() {
+  // enable all the buttons
   document.getElementById("submitguess").disabled = false;
   document.getElementById("clear").disabled = false;
   document.getElementById("reset").disabled = false;
   document.getElementById("restart").disabled = false;
 };
 
+// function called when 'Guess' button is clicked
 function myResponse() {
+  //sets user input as variable 'guess'
   var guess = document.getElementById('guess').value;
 
+  // beginning of if statement main gameplay
   if (guess < min || guess > max) {
+    // if guess is outside range then display message
     document.getElementById('guesstext').innerHTML = `Choose a number between ${min} and ${max}`;
   } else {
     if (guess == correct) {
+      // if guess is correct set resonse and change min and max values
       var response = 'BOOM!';
       min -= 10;
       max += 10;
     } else if (guess > correct) {
+      //if guess is too high set response
       var response = 'That is too high';
     } else {
+      // if guess is too low set response
       var response = 'That is too low';
     };
+    // set HTML for responses
     document.getElementById("guesstext").innerHTML = "Your last guess was";
     document.getElementById("yourguess").innerHTML = guess;
     document.getElementById("response").innerHTML = response;
   };
 };
 
+// function called when 'Clear' button is clicked
 function clearguess() {
+  // clear number field and disable buttons
   document.getElementById('guess').value = "";
   document.getElementById("submitguess").disabled = true;
   document.getElementById("clear").disabled = true;
   document.getElementById("restart").disabled = true;
 }
 
+// function called when 'New #' is clicked
 function reset() {
+  // generate new random number
   correct = Math.floor(Math.random() * (max - min + 1)) + min;
+  // reset messages
   document.getElementById('message').innerHTML = "Guess a number between " + min + " and " + max;
   document.getElementById("guesstext").innerHTML = "";
   document.getElementById("yourguess").innerHTML = "";
   document.getElementById("response").innerHTML = "";
   document.getElementById('guess').value = "";
+  // disable buttons
   document.getElementById("submitguess").disabled = true;
   document.getElementById("clear").disabled = true;
   document.getElementById("reset").disabled = true;
 }
 
+// function called when 'Restart' is clicked
 function restart() {
-  var min = 40;
-  var max = 60;
-  var correct = Math.floor(Math.random() * (max - min + 1)) + min;
+  // reset min and max variables
+  min = 40;
+  max = 60;
+  // generate new random number
+  correct = Math.floor(Math.random() * (max - min + 1)) + min;
+  // reset messages
   document.getElementById('message').innerHTML = "Guess a number between " + min + " and " + max;
   document.getElementById("guesstext").innerHTML = "";
   document.getElementById("yourguess").innerHTML = "";
   document.getElementById("response").innerHTML = "";
   document.getElementById('guess').value = "";
+  // disable buttons
   document.getElementById("submitguess").disabled = true;
   document.getElementById("clear").disabled = true;
   document.getElementById("reset").disabled = true;
